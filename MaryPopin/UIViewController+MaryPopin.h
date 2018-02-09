@@ -378,4 +378,9 @@ typedef NS_ENUM(NSInteger, BKTPopinAlignementOption) {
  */
 - (void)setBlurParameters:(BKTBlurParameters *)blurParameters;
 
+
+- (void)setDismissDimmingViewCompletionBlock:(void(^)())dismissDimmingViewCompletionBlock;
+- (void(^)())dismissDimmingViewCompletionBlock;
+
+
 @end
