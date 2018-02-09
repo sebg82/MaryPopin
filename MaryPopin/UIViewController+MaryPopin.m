@@ -231,7 +231,7 @@ CG_INLINE CGRect    BkRectInRectWithAlignementOption(CGRect myRect, CGRect refRe
 
 - (void)dismissCurrentPopinControllerAnimated:(BOOL)animated
 {
-    [self dismissCurrentPopinControllerAnimated:animated completion:nil];
+    [self dismissCurrentPopinControllerAnimated:animated completion:[self dismissDimmingViewCompletionBlock]];
 }
 
 - (void)dismissCurrentPopinControllerAnimated:(BOOL)animated completion:(void(^)(void))completion
@@ -583,6 +583,15 @@ CG_INLINE CGRect    BkRectInRectWithAlignementOption(CGRect myRect, CGRect refRe
 - (void)setPopinCustomOutAnimation:(void (^)(UIViewController * popinController,CGRect initialFrame,CGRect finalFrame))popinCustomOutAnimation
 {
     objc_setAssociatedObject(self, @selector(popinCustomOutAnimation),  popinCustomOutAnimation, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void)setDismissDimmingViewCompletionBlock:(void(^)())dismissDimmingViewCompletionBlock
+{
+    objc_setAssociatedObject(self, @selector(dismissDimmingViewCompletionBlock), dismissDimmingViewCompletionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+- (void(^)())dismissDimmingViewCompletionBlock
+{
+    return objc_getAssociatedObject(self, _cmd);
 }
 
 - (BKTPopinAlignementOption)popinAlignment
